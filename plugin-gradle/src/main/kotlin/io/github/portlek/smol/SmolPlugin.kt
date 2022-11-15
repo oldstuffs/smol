@@ -13,16 +13,16 @@ import org.gradle.kotlin.dsl.extra
 const val SMOL_CONFIGURATION_NAME = "smol"
 const val SMOL_API_CONFIGURATION_NAME = "smolApi"
 const val SMOL_JAR_TASK_NAME = "smolJar"
-private const val RESOURCES_TASK = "processResources"
-private const val SHADOW_ID = "com.github.johnrengelman.shadow"
+const val SHADOW_ID = "com.github.johnrengelman.shadow"
+const val RESOURCES_TASK = "processResources"
 
 class SmolPlugin : Plugin<Project> {
 
   override fun apply(target: Project): Unit =
       with(target) {
-        this.plugins.apply(JavaPlugin::class.java)
-        this.plugins.apply(JavaLibraryPlugin::class.java)
-        if (!this.plugins.hasPlugin(SHADOW_ID)) {
+        plugins.apply(JavaPlugin::class.java)
+        plugins.apply(JavaLibraryPlugin::class.java)
+        if (!plugins.hasPlugin(SHADOW_ID)) {
           throw ShadowNotFoundException(
               "Smol depends on the Shadow plugin, please apply the plugin. For more information visit: https://imperceptiblethoughts.com/shadow/")
         }
@@ -38,7 +38,7 @@ class SmolPlugin : Plugin<Project> {
                 JavaPlugin.TEST_IMPLEMENTATION_CONFIGURATION_NAME)
         val smolJar =
             tasks.create(SMOL_JAR_TASK_NAME, SmolJar::class.java, smolConfig, smolApiConfig)
-        this.extra.set("smol", asGroovyClosure("+") { version -> smolJarLib(version) })
+        extra.set("smol", asGroovyClosure("+") { version -> smolJarLib(version) })
         val shadowTask = tasks.withType(ShadowJar::class.java).first()
         shadowTask.doFirst {
           smolJar.relocations().forEach { rule ->

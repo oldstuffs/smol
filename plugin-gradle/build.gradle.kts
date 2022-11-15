@@ -17,6 +17,7 @@ dependencies {
   compileOnly(libs.coroutines)
   compileOnly(libs.gson)
   compileOnly(libs.shadow)
+  compileOnly(libs.coroutines)
 }
 
 tasks {
