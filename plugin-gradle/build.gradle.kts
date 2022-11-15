@@ -35,55 +35,50 @@ tasks {
   val javadocJar by creating(Jar::class) {
     dependsOn("javadoc")
     archiveClassifier.set("javadoc")
-    archiveBaseName.set(project.name)
-    archiveVersion.set(project.version.toString())
     from(javadoc)
   }
 
   val sourcesJar by creating(Jar::class) {
     dependsOn("classes")
     archiveClassifier.set("sources")
-    archiveBaseName.set(project.name)
-    archiveVersion.set(project.version.toString())
     from(sourceSets["main"].allSource)
   }
 
   build {
-    dependsOn(jar)
     dependsOn(sourcesJar)
     dependsOn(javadocJar)
   }
 }
 
-publishing {
-  publications {
-    withType<MavenPublication> {
-      groupId = project.group.toString()
-      artifactId = project.name
-      version = project.version.toString()
+afterEvaluate {
+  publishing {
+    publications {
+      named<MavenPublication>("pluginMaven") {
+        groupId = project.group.toString()
+        artifactId = project.name
+        version = project.version.toString()
 
-      artifact(tasks["sourcesJar"])
-      artifact(tasks["javadocJar"])
-      pom {
-        name.set(project.name)
-        description.set("Java runtime dependency management.")
-        licenses {
-          license {
-            name.set("MIT License")
-            url.set("https://mit-license.org/license.txt")
+        pom {
+          name.set(project.name)
+          description.set("Java runtime dependency management.")
+          licenses {
+            license {
+              name.set("MIT License")
+              url.set("https://mit-license.org/license.txt")
+            }
           }
-        }
-        developers {
-          developer {
-            id.set("portlek")
-            name.set("Hasan Demirtaş")
-            email.set("utsukushihito@outlook.com")
+          developers {
+            developer {
+              id.set("portlek")
+              name.set("Hasan Demirtaş")
+              email.set("utsukushihito@outlook.com")
+            }
           }
-        }
-        scm {
-          connection.set("scm:git:git://github.com/portlek/smol.git")
-          developerConnection.set("scm:git:ssh://github.com/portlek/smol.git")
-          url.set("https://github.com/portlek/smol")
+          scm {
+            connection.set("scm:git:git://github.com/portlek/smol.git")
+            developerConnection.set("scm:git:ssh://github.com/portlek/smol.git")
+            url.set("https://github.com/portlek/smol")
+          }
         }
       }
     }

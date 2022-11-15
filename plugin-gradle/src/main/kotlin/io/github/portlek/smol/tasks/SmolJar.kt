@@ -171,6 +171,12 @@ constructor(private val smolConfig: Configuration, private val smolApiConfig: Co
                 .mapNotNull { it.toSmolDependency() }
                 .toMutableSet()
                 .flatten()
+        dependencies.addAll(
+            RenderableModuleResult(smolApiConfig.incoming.resolutionResult.root)
+                .children
+                .mapNotNull { it.toSmolDependency() }
+                .toMutableSet()
+                .flatten())
         val repositories =
             repositories
                 .filterIsInstance<MavenArtifactRepository>()
