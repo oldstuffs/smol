@@ -16,7 +16,7 @@ public record GsonPreResolutionDataReader(@NotNull GsonFacade gson)
     @NotNull final InputStream inputStream
   ) throws ReflectiveOperationException {
     final var inputStreamReader = new InputStreamReader(inputStream);
-    final var rawType = new TypeToken<Map<String, ResolutionResult>>()
+    final var rawType = new TypeToken<Map<String, ResolutionResult>>() {}
       .rawType();
     return this.gson.fromJson(inputStreamReader, rawType);
   }

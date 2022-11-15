@@ -12,12 +12,11 @@ repositories {
 }
 
 dependencies {
-  compileOnly(project(":smol"))
+  implementation(project(":smol"))
   compileOnly(kotlin("stdlib", "1.7.21"))
-  compileOnly(libs.coroutines)
-  compileOnly(libs.gson)
+  implementation(libs.coroutines)
+  implementation(libs.gson)
   compileOnly(libs.shadow)
-  compileOnly(libs.coroutines)
 }
 
 tasks {

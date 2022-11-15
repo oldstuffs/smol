@@ -11,12 +11,12 @@ import org.jetbrains.annotations.NotNull;
 @Getter
 @Accessors(fluent = true)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public final class TypeToken<T> {
+public abstract class TypeToken<T> {
 
   @NotNull
   Type rawType;
 
-  public TypeToken() {
+  protected TypeToken() {
     this.rawType = TypeToken.getSuperclassTypeParameter(this.getClass());
   }
 
