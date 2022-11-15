@@ -64,6 +64,7 @@ afterEvaluate {
         pom {
           name.set(project.name)
           description.set("Java runtime dependency management.")
+          url.set("https://github.com/portlek/smol/")
           licenses {
             license {
               name.set("MIT License")
