@@ -9,5 +9,5 @@ junit = { module = "org.junit.jupiter:junit-jupiter", version = "5.9.1" }
 [plugins]
 spotless = { id = "com.diffplug.spotless", version = "6.11.0" }
 nexus = { id = "io.github.gradle-nexus.publish-plugin", version = "1.1.0" }
-pluginpublish = { id = "com.gradle.plugin-publish", version = "0.21.0" }
+pluginpublish = { id = "com.gradle.plugin-publish", version = "1.1.0" }
 shadow = { id = "com.github.johnrengelman.shadow", version = "7.1.2" }
