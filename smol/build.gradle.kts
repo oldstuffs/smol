@@ -14,7 +14,6 @@ repositories {
 dependencies {
     compileOnly(libs.annotations)
     compileOnly(libs.lombok)
-    compileOnly(libs.gson)
 
     annotationProcessor(libs.annotations)
     annotationProcessor(libs.lombok)
@@ -24,7 +23,6 @@ dependencies {
 
     testImplementation(libs.annotations)
     testImplementation(libs.lombok)
-    testImplementation(libs.gson)
     testImplementation(libs.junit)
 }
 
@@ -88,7 +86,6 @@ publishing {
             pom {
                 name.set(project.name)
                 description.set("Java runtime dependency management.")
-                url.set("https://infumia.com.tr/")
                 licenses {
                     license {
                         name.set("MIT License")

@@ -69,7 +69,6 @@ publishing {
             pom {
                 name.set(project.name)
                 description.set("Java runtime dependency management.")
-                url.set("https://infumia.com.tr/")
                 licenses {
                     license {
                         name.set("MIT License")
