@@ -52,14 +52,17 @@ import java.util.Collections;
 import java.util.Objects;
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Setter
 @Accessors(fluent = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class ApplicationBuilder {
 
   private static final Path DEFAULT_DOWNLOAD_DIRECTORY = new File(
@@ -68,66 +71,77 @@ public abstract class ApplicationBuilder {
     .toPath();
 
   @Getter
+  @NotNull
   final String applicationName;
 
+  @Nullable
   DependencyDataProviderFactory dataProviderFactory;
 
+  @Nullable
   URL dependencyFileUrl;
 
+  @Nullable
   Path downloadDirectoryPath;
 
+  @Nullable
   DependencyDownloaderFactory downloaderFactory;
 
+  @Nullable
   RepositoryEnquirerFactory enquirerFactory;
 
+  @Nullable
   DependencyInjectorFactory injectorFactory;
 
+  @Nullable
   ProcessLogger logger;
 
+  @Nullable
   MirrorSelector mirrorSelector;
 
+  @Nullable
   DependencyDataProviderFactory moduleDataProviderFactory;
 
+  @Nullable
   PreResolutionDataProviderFactory preResolutionDataProviderFactory;
 
+  @Nullable
   URL preResolutionFileUrl;
 
+  @Nullable
   RelocationHelperFactory relocationHelperFactory;
 
+  @Nullable
   RelocatorFactory relocatorFactory;
 
+  @Nullable
   DependencyResolverFactory resolverFactory;
 
+  @Nullable
   DependencyVerifierFactory verifierFactory;
 
-  protected ApplicationBuilder(@NotNull final String applicationName) {
-    this.applicationName =
-      Objects.requireNonNull(
-        applicationName,
-        "Requires non-null application name!"
-      );
-  }
-
-  public static ApplicationBuilder appending(final String name)
-    throws URISyntaxException, ReflectiveOperationException, NoSuchAlgorithmException, IOException {
+  @NotNull
+  public static ApplicationBuilder appending(@NotNull final String name) {
     return InjectingApplicationBuilder.createAppending(name);
   }
 
+  @NotNull
   public static ApplicationBuilder injecting(
-    final String name,
-    final Injectable injectable
+    @NotNull final String name,
+    @NotNull final Injectable injectable
   ) {
     return new InjectingApplicationBuilder(name, injectable);
   }
 
+  @NotNull
   public static ApplicationBuilder isolated(
     @NotNull final String name,
     @NotNull final IsolationConfiguration config,
-    @NotNull final Object@NotNull[] args
+    @NotNull final Object @NotNull [] args
   ) {
     return new IsolatedApplicationBuilder(name, config, args);
   }
 
+  @NotNull
   public final Application build()
     throws IOException, ReflectiveOperationException, URISyntaxException, NoSuchAlgorithmException {
     final var mediatingLogger = LogDispatcher.getMediatingLogger();
@@ -138,6 +152,7 @@ public abstract class ApplicationBuilder {
     return result;
   }
 
+  @NotNull
   protected final DependencyInjector createInjector()
     throws IOException, URISyntaxException, NoSuchAlgorithmException, ReflectiveOperationException {
     return this.getInjectorFactory()
@@ -157,6 +172,7 @@ public abstract class ApplicationBuilder {
       );
   }
 
+  @NotNull
   protected final DependencyDataProviderFactory getDataProviderFactory()
     throws URISyntaxException, ReflectiveOperationException, NoSuchAlgorithmException, IOException {
     if (this.dataProviderFactory == null) {
@@ -170,14 +186,16 @@ public abstract class ApplicationBuilder {
     return this.dataProviderFactory;
   }
 
+  @NotNull
   protected final URL getDependencyFileUrl() {
     if (this.dependencyFileUrl == null) {
       this.dependencyFileUrl =
         this.getClass().getClassLoader().getResource("smol.json");
     }
-    return this.dependencyFileUrl;
+    return Objects.requireNonNull(this.dependencyFileUrl, "smol.json not found!");
   }
 
+  @NotNull
   protected final Path getDownloadDirectoryPath() {
     if (this.downloadDirectoryPath == null) {
       this.downloadDirectoryPath =
@@ -186,6 +204,7 @@ public abstract class ApplicationBuilder {
     return this.downloadDirectoryPath;
   }
 
+  @NotNull
   protected final DependencyDownloaderFactory getDownloaderFactory() {
     if (this.downloaderFactory == null) {
       this.downloaderFactory = new URLDependencyDownloaderFactory();
@@ -193,6 +212,7 @@ public abstract class ApplicationBuilder {
     return this.downloaderFactory;
   }
 
+  @NotNull
   protected final RepositoryEnquirerFactory getEnquirerFactory() {
     if (this.enquirerFactory == null) {
       final var releaseStrategy = new MavenPathResolutionStrategy();
@@ -218,6 +238,7 @@ public abstract class ApplicationBuilder {
     return this.enquirerFactory;
   }
 
+  @NotNull
   protected final DependencyInjectorFactory getInjectorFactory() {
     if (this.injectorFactory == null) {
       this.injectorFactory = new SimpleDependencyInjectorFactory();
@@ -225,13 +246,16 @@ public abstract class ApplicationBuilder {
     return this.injectorFactory;
   }
 
+  @NotNull
   protected final ProcessLogger getLogger() {
     if (this.logger == null) {
-      this.logger = (msg, args) -> {};
+      this.logger = (msg, args) -> {
+      };
     }
     return this.logger;
   }
 
+  @NotNull
   protected final MirrorSelector getMirrorSelector() {
     if (this.mirrorSelector == null) {
       this.mirrorSelector = new SimpleMirrorSelector();
@@ -239,6 +263,7 @@ public abstract class ApplicationBuilder {
     return this.mirrorSelector;
   }
 
+  @NotNull
   protected final DependencyDataProviderFactory getModuleDataProviderFactory()
     throws URISyntaxException, ReflectiveOperationException, NoSuchAlgorithmException, IOException {
     if (this.moduleDataProviderFactory == null) {
@@ -252,6 +277,7 @@ public abstract class ApplicationBuilder {
     return this.moduleDataProviderFactory;
   }
 
+  @NotNull
   protected final PreResolutionDataProviderFactory getPreResolutionDataProviderFactory()
     throws URISyntaxException, ReflectiveOperationException, NoSuchAlgorithmException, IOException {
     if (this.preResolutionDataProviderFactory == null) {
@@ -265,14 +291,16 @@ public abstract class ApplicationBuilder {
     return this.preResolutionDataProviderFactory;
   }
 
+  @NotNull
   protected final URL getPreResolutionFileUrl() {
     if (this.preResolutionFileUrl == null) {
       this.preResolutionFileUrl =
         this.getClass().getClassLoader().getResource("smol-resolutions.json");
     }
-    return this.preResolutionFileUrl;
+    return Objects.requireNonNull(this.preResolutionFileUrl, "smol-resolutions.json file not found!");
   }
 
+  @NotNull
   protected final RelocationHelperFactory getRelocationHelperFactory()
     throws NoSuchAlgorithmException, IOException, URISyntaxException {
     if (this.relocationHelperFactory == null) {
@@ -292,6 +320,7 @@ public abstract class ApplicationBuilder {
     return this.relocationHelperFactory;
   }
 
+  @NotNull
   protected final RelocatorFactory getRelocatorFactory()
     throws ReflectiveOperationException, NoSuchAlgorithmException, IOException, URISyntaxException {
     if (this.relocatorFactory == null) {
@@ -305,6 +334,7 @@ public abstract class ApplicationBuilder {
     return this.relocatorFactory;
   }
 
+  @NotNull
   protected final DependencyResolverFactory getResolverFactory() {
     if (this.resolverFactory == null) {
       final var pinger = new HttpURLPinger();
@@ -313,6 +343,7 @@ public abstract class ApplicationBuilder {
     return this.resolverFactory;
   }
 
+  @NotNull
   protected final DependencyVerifierFactory getVerifierFactory()
     throws NoSuchAlgorithmException {
     if (this.verifierFactory == null) {

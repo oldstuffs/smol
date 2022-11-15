@@ -38,7 +38,7 @@ public final class InjectingApplicationBuilder extends ApplicationBuilder {
   @NotNull
   public static ApplicationBuilder createAppending(
     @NotNull final String applicationName
-  ) throws NoSuchAlgorithmException, IOException, URISyntaxException {
+  ) {
     final var classLoader = ApplicationBuilder.class.getClassLoader();
     return InjectingApplicationBuilder.createAppending(
       applicationName,
@@ -62,9 +62,9 @@ public final class InjectingApplicationBuilder extends ApplicationBuilder {
           );
         } catch (
           final URISyntaxException
-          | ReflectiveOperationException
-          | NoSuchAlgorithmException
-          | IOException exception
+                | ReflectiveOperationException
+                | NoSuchAlgorithmException
+                | IOException exception
         ) {
           exception.printStackTrace();
         }
