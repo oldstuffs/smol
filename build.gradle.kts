@@ -5,7 +5,9 @@ plugins {
     alias(libs.plugins.nexus)
 }
 
-group = "io.github.portlek"
+allprojects {
+    group = "io.github.portlek"
+}
 
 repositories {
     mavenCentral()

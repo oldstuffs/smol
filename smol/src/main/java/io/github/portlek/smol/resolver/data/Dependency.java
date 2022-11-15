@@ -5,11 +5,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public record Dependency(
-  @NotNull String artifactId,
   @NotNull String groupId,
+  @NotNull String artifactId,
+  @NotNull String version,
   @Nullable String snapshotId,
-  @NotNull Collection<Dependency> transitive,
-  @NotNull String version
+  @NotNull Collection<Dependency> transitive
 ) {
   @NotNull
   public String dependencyNotation() {

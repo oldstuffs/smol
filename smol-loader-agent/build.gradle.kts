@@ -7,25 +7,6 @@ plugins {
 
 repositories {
     mavenCentral()
-    maven("https://oss.sonatype.org/content/repositories/snapshots/")
-    mavenLocal()
-}
-
-dependencies {
-    compileOnly(libs.annotations)
-    compileOnly(libs.lombok)
-    compileOnly(libs.gson)
-
-    annotationProcessor(libs.annotations)
-    annotationProcessor(libs.lombok)
-
-    testAnnotationProcessor(libs.annotations)
-    testAnnotationProcessor(libs.lombok)
-
-    testImplementation(libs.annotations)
-    testImplementation(libs.lombok)
-    testImplementation(libs.gson)
-    testImplementation(libs.junit)
 }
 
 java {
