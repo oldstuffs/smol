@@ -24,6 +24,14 @@ if (spotlessApply) {
             encoding("UTF-8")
         }
 
+        kotlin {
+            target("**/src/**/kotlin/**/*.kt")
+            endWithNewline()
+            indentWithSpaces(2)
+            trimTrailingWhitespace()
+            ktlint("0.47.1")
+        }
+
         java {
             target("**/src/**/java/**/*.java")
             importOrder()
