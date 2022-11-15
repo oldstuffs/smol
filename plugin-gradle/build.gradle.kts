@@ -3,6 +3,7 @@ plugins {
   `java-gradle-plugin`
   alias(libs.plugins.pluginpublish)
   `maven-publish`
+  signing
 }
 
 group = "io.github.portlek.smol-plugin-gradle"
@@ -50,10 +51,12 @@ tasks {
   }
 }
 
+val signRequired = !rootProject.property("dev").toString().toBoolean()
+
 afterEvaluate {
   publishing {
     publications {
-      named<MavenPublication>("pluginMaven") {
+      val publication = named<MavenPublication>("pluginMaven") {
         groupId = project.group.toString()
         artifactId = project.name
         version = project.version.toString()
@@ -79,6 +82,13 @@ afterEvaluate {
             developerConnection.set("scm:git:ssh://github.com/portlek/smol.git")
             url.set("https://github.com/portlek/smol")
           }
+        }
+      }
+
+      signing {
+        isRequired = signRequired
+        if (isRequired) {
+          useGpgCmd()
         }
       }
     }
