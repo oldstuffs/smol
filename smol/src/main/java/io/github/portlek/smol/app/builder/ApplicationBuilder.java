@@ -136,7 +136,7 @@ public abstract class ApplicationBuilder {
   public static ApplicationBuilder isolated(
     @NotNull final String name,
     @NotNull final IsolationConfiguration config,
-    @NotNull final Object @NotNull [] args
+    @NotNull final Object@NotNull[] args
   ) {
     return new IsolatedApplicationBuilder(name, config, args);
   }
@@ -192,7 +192,10 @@ public abstract class ApplicationBuilder {
       this.dependencyFileUrl =
         this.getClass().getClassLoader().getResource("smol.json");
     }
-    return Objects.requireNonNull(this.dependencyFileUrl, "smol.json not found!");
+    return Objects.requireNonNull(
+      this.dependencyFileUrl,
+      "smol.json not found!"
+    );
   }
 
   @NotNull
@@ -249,8 +252,7 @@ public abstract class ApplicationBuilder {
   @NotNull
   protected final ProcessLogger getLogger() {
     if (this.logger == null) {
-      this.logger = (msg, args) -> {
-      };
+      this.logger = (msg, args) -> {};
     }
     return this.logger;
   }
@@ -297,7 +299,10 @@ public abstract class ApplicationBuilder {
       this.preResolutionFileUrl =
         this.getClass().getClassLoader().getResource("smol-resolutions.json");
     }
-    return Objects.requireNonNull(this.preResolutionFileUrl, "smol-resolutions.json file not found!");
+    return Objects.requireNonNull(
+      this.preResolutionFileUrl,
+      "smol-resolutions.json file not found!"
+    );
   }
 
   @NotNull
