@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -13,7 +14,7 @@ public abstract class Application {
 
   @Nullable
   @SuppressWarnings("unchecked")
-  public final <T> T getFacade(final Class<T> clazz) {
+  public final <T> T getFacade(@NotNull final Class<T> clazz) {
     final var obj = this.facadeMapping.get(clazz);
     if (obj == null) {
       return null;
@@ -37,8 +38,8 @@ public abstract class Application {
   @Nullable
   @SuppressWarnings("unchecked")
   protected final <T, U extends T> T registerFacade(
-    final Class<T> clazz,
-    final U t
+    @NotNull final Class<T> clazz,
+    @NotNull final U t
   ) {
     final var obj = this.facadeMapping.put(clazz, t);
     if (obj != null && !clazz.isAssignableFrom(obj.getClass())) {
