@@ -56,11 +56,7 @@ val signRequired = !rootProject.property("dev").toString().toBoolean()
 afterEvaluate {
   publishing {
     publications {
-      val publication = named<MavenPublication>("pluginMaven") {
-        groupId = project.group.toString()
-        artifactId = project.name
-        version = project.version.toString()
-
+      named<MavenPublication>("pluginMaven") {
         pom {
           name.set(project.name)
           description.set("Java runtime dependency management.")
@@ -85,14 +81,39 @@ afterEvaluate {
           }
         }
       }
-
-      signing {
-        isRequired = signRequired
-        if (isRequired) {
-          useGpgCmd()
+      named<MavenPublication>("smolPluginMarkerMaven") {
+        pom {
+          name.set(project.name)
+          description.set("Java runtime dependency management.")
+          url.set("https://github.com/portlek/smol/")
+          licenses {
+            license {
+              name.set("MIT License")
+              url.set("https://mit-license.org/license.txt")
+            }
+          }
+          developers {
+            developer {
+              id.set("portlek")
+              name.set("Hasan Demirtaş")
+              email.set("utsukushihito@outlook.com")
+            }
+          }
+          scm {
+            connection.set("scm:git:git://github.com/portlek/smol.git")
+            developerConnection.set("scm:git:ssh://github.com/portlek/smol.git")
+            url.set("https://github.com/portlek/smol")
+          }
         }
       }
     }
+  }
+}
+
+signing {
+  isRequired = signRequired
+  if (isRequired) {
+    useGpgCmd()
   }
 }
 
