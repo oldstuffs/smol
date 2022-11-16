@@ -16,9 +16,9 @@ public final class MavenPomPathResolutionStrategy
   @Override
   public Collection<String> pathTo(
     @NotNull final Repository repository,
-    final Dependency dependency
+    @NotNull final Dependency dependency
   ) {
-    final String repoUrl = Repositories.fetchFormattedUrl(repository);
+    final var repoUrl = Repositories.fetchFormattedUrl(repository);
     return Collections.singleton(
       String.format(
         MavenPomPathResolutionStrategy.PATH_FORMAT,

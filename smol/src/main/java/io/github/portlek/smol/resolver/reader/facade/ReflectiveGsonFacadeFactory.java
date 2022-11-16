@@ -13,7 +13,6 @@ import java.io.Reader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.security.NoSuchAlgorithmException;
@@ -101,7 +100,7 @@ public record ReflectiveGsonFacadeFactory(
   @NotNull
   private static DependencyData getGsonDependency(
     @NotNull final Collection<Repository> repositories
-  ) throws MalformedURLException {
+  ) {
     final var gson = new Dependency(
       Packages.fix("com#google#code#gson"),
       "gson",
@@ -119,9 +118,8 @@ public record ReflectiveGsonFacadeFactory(
 
   @Override
   public GsonFacade createFacade() throws ReflectiveOperationException {
-    final var gson = this.gsonConstructor.newInstance();
     return new ReflectiveGsonFacade(
-      gson,
+      this.gsonConstructor.newInstance(),
       this.gsonFromJsonMethod,
       this.gsonFromJsonTypeMethod,
       this.canonicalizeMethod

@@ -12,6 +12,7 @@ public final class MavenPathResolutionStrategy
 
   private static final String PATH_FORMAT = "%s%s/%s/%s/%3$s-%4$s.jar";
 
+  @NotNull
   @Override
   public Collection<String> pathTo(
     @NotNull final Repository repository,

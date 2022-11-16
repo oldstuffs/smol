@@ -53,7 +53,7 @@ public final class InjectingApplicationBuilder extends ApplicationBuilder {
   ) {
     return new InjectingApplicationBuilder(
       applicationName,
-      (ApplicationBuilder builder) -> {
+      builder -> {
         try {
           return InjectableFactory.create(
             builder.getDownloadDirectoryPath(),

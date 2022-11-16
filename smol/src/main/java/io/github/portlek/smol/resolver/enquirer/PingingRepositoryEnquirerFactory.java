@@ -6,8 +6,8 @@ import io.github.portlek.smol.resolver.strategy.PathResolutionStrategy;
 import org.jetbrains.annotations.NotNull;
 
 public record PingingRepositoryEnquirerFactory(
-  @NotNull PathResolutionStrategy checksumURLCreationStrategy,
   @NotNull PathResolutionStrategy pathResolutionStrategy,
+  @NotNull PathResolutionStrategy checksumURLCreationStrategy,
   @NotNull PathResolutionStrategy pomURLCreationStrategy,
   @NotNull URLPinger urlPinger
 )

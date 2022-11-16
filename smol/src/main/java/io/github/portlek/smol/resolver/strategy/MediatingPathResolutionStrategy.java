@@ -10,6 +10,7 @@ public record MediatingPathResolutionStrategy(
   @NotNull PathResolutionStrategy snapshotStrategy
 )
   implements PathResolutionStrategy {
+  @NotNull
   @Override
   public Collection<String> pathTo(
     @NotNull final Repository repository,

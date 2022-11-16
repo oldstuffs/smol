@@ -19,6 +19,7 @@ public record RelocationFilePathStrategy(
     FolderedFilePathStrategy.class.getName()
   );
 
+  @NotNull
   public static FilePathStrategy createStrategy(
     @NotNull final File rootDirectory,
     @NotNull final String applicationName

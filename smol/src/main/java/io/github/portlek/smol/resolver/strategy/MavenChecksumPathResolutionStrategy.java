@@ -28,6 +28,7 @@ public final class MavenChecksumPathResolutionStrategy
     this.resolutionStrategy = resolutionStrategy;
   }
 
+  @NotNull
   @Override
   public Collection<String> pathTo(
     @NotNull final Repository repository,

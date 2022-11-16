@@ -16,6 +16,7 @@ public final class MavenSnapshotPathResolutionStrategy
   private static final String PATH_FORMAT_ALT =
     "%s%s/%s/%s-SNAPSHOT/%4$s-%s/%3$s-%4$s-%5$s.jar";
 
+  @NotNull
   @Override
   public Collection<String> pathTo(
     @NotNull final Repository repository,

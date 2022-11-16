@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.security.NoSuchAlgorithmException;
@@ -127,7 +126,7 @@ public record ReflectiveJarRelocatorFacadeFactory(
   @NotNull
   private static DependencyData getJarRelocatorDependency(
     @NotNull final Collection<Repository> repositories
-  ) throws MalformedURLException {
+  ) {
     final var asm = new Dependency(
       Packages.fix("org#ow2#asm"),
       "asm",
