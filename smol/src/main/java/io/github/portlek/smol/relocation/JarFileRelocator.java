@@ -11,7 +11,6 @@ public record JarFileRelocator(
   @NotNull JarRelocatorFacadeFactory relocatorFacadeFactory
 )
   implements Relocator {
-  @NotNull
   @Override
   @SuppressWarnings("ResultOfMethodCallIgnored")
   public void relocate(@NotNull final File input, @NotNull final File output)
