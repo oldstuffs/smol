@@ -1,5 +1,6 @@
 package io.github.portlek.smol.injector;
 
+import io.github.portlek.smol.downloader.DownloadNotifier;
 import io.github.portlek.smol.injector.helper.InjectionHelper;
 import io.github.portlek.smol.injector.helper.InjectionHelperFactory;
 import io.github.portlek.smol.injector.loader.Injectable;
@@ -15,7 +16,8 @@ import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 
 public record SimpleDependencyInjector(
-  @NotNull InjectionHelperFactory injectionHelperFactory
+  @NotNull InjectionHelperFactory injectionHelperFactory,
+  @NotNull DownloadNotifier downloadNotifier
 )
   implements DependencyInjector {
   @Override
@@ -41,6 +43,7 @@ public record SimpleDependencyInjector(
         if (depJar == null) {
           continue;
         }
+        this.downloadNotifier.accept(dependency);
         injectable.inject(depJar.toURI().toURL());
         this.injectDependencies(
             injectable,

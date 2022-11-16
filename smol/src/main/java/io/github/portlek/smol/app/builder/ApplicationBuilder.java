@@ -2,6 +2,7 @@ package io.github.portlek.smol.app.builder;
 
 import io.github.portlek.smol.app.Application;
 import io.github.portlek.smol.downloader.DependencyDownloaderFactory;
+import io.github.portlek.smol.downloader.DownloadNotifier;
 import io.github.portlek.smol.downloader.URLDependencyDownloaderFactory;
 import io.github.portlek.smol.downloader.output.DependencyOutputWriterFactory;
 import io.github.portlek.smol.downloader.strategy.ChecksumFilePathStrategy;
@@ -82,6 +83,9 @@ public abstract class ApplicationBuilder {
 
   @Nullable
   Path downloadDirectoryPath;
+
+  @Nullable
+  DownloadNotifier downloadNotifier;
 
   @Nullable
   DependencyDownloaderFactory downloaderFactory;
@@ -208,6 +212,14 @@ public abstract class ApplicationBuilder {
   }
 
   @NotNull
+  protected final DownloadNotifier getDownloadNotifier() {
+    if (this.downloadNotifier == null) {
+      this.downloadNotifier = dependency -> {};
+    }
+    return this.downloadNotifier;
+  }
+
+  @NotNull
   protected final DependencyDownloaderFactory getDownloaderFactory() {
     if (this.downloaderFactory == null) {
       this.downloaderFactory = new URLDependencyDownloaderFactory();
@@ -244,7 +256,8 @@ public abstract class ApplicationBuilder {
   @NotNull
   protected final DependencyInjectorFactory getInjectorFactory() {
     if (this.injectorFactory == null) {
-      this.injectorFactory = new SimpleDependencyInjectorFactory();
+      this.injectorFactory =
+        new SimpleDependencyInjectorFactory(this.getDownloadNotifier());
     }
     return this.injectorFactory;
   }
