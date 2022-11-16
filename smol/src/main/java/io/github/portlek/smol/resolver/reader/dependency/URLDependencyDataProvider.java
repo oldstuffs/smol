@@ -4,7 +4,6 @@ import io.github.portlek.smol.resolver.data.DependencyData;
 import java.io.IOException;
 import java.net.URL;
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
@@ -23,10 +22,9 @@ public final class URLDependencyDataProvider implements DependencyDataProvider {
   @NotNull
   DependencyReader dependencyReader;
 
-  @Getter
   @Nullable
   @NonFinal
-  private DependencyData cachedData;
+  DependencyData cachedData;
 
   @NotNull
   @Override

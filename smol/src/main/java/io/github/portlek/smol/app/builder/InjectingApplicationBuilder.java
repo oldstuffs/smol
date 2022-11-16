@@ -39,10 +39,9 @@ public final class InjectingApplicationBuilder extends ApplicationBuilder {
   public static ApplicationBuilder createAppending(
     @NotNull final String applicationName
   ) {
-    final var classLoader = ApplicationBuilder.class.getClassLoader();
     return InjectingApplicationBuilder.createAppending(
       applicationName,
-      classLoader
+      ApplicationBuilder.class.getClassLoader()
     );
   }
 
