@@ -3,11 +3,12 @@ package io.github.portlek.smol.func
 import io.github.portlek.smol.SMOL_API_CONFIGURATION_NAME
 import io.github.portlek.smol.SMOL_CONFIGURATION_NAME
 import org.gradle.api.Action
-import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.ExternalModuleDependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.provider.Provider
 import org.gradle.internal.Cast.uncheckedCast
+import org.gradle.kotlin.dsl.add
+
 fun DependencyHandler.smol(
     dependencyNotation: Provider<*>,
     dependencyOptions: Action<in ExternalModuleDependency>
@@ -32,13 +33,13 @@ fun DependencyHandler.smolApi(
 
 fun DependencyHandler.smol(
     dependencyNotation: String,
-    configure: Action<ExternalModuleDependency>?
-) = withOptions(SMOL_CONFIGURATION_NAME, dependencyNotation, configure)
+    dependencyConfiguration: ExternalModuleDependency.() -> Unit
+) = add(SMOL_CONFIGURATION_NAME, dependencyNotation, dependencyConfiguration)
 
 fun DependencyHandler.smolApi(
     dependencyNotation: String,
-    configure: Action<ExternalModuleDependency>?
-) = withOptions(SMOL_API_CONFIGURATION_NAME, dependencyNotation, configure)
+    dependencyConfiguration: ExternalModuleDependency.() -> Unit
+) = add(SMOL_API_CONFIGURATION_NAME, dependencyNotation, dependencyConfiguration)
 
 private fun DependencyHandler.withOptions(
     configuration: String,
