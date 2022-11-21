@@ -23,13 +23,11 @@ fun DependencyHandler.smolApi(
   addProvider(SMOL_API_CONFIGURATION_NAME, dependencyNotation, dependencyOptions)
 }
 
-fun DependencyHandler.smol(
-    dependencyNotation: Any
-) = add(SMOL_CONFIGURATION_NAME, dependencyNotation)
+fun DependencyHandler.smol(dependencyNotation: Any) =
+    add(SMOL_CONFIGURATION_NAME, dependencyNotation)
 
-fun DependencyHandler.smolApi(
-    dependencyNotation: Any
-) = add(SMOL_API_CONFIGURATION_NAME, dependencyNotation)
+fun DependencyHandler.smolApi(dependencyNotation: Any) =
+    add(SMOL_API_CONFIGURATION_NAME, dependencyNotation)
 
 fun DependencyHandler.smol(
     dependencyNotation: String,
@@ -46,9 +44,9 @@ private fun DependencyHandler.withOptions(
     dependencyNotation: String,
     dependencyConfiguration: Action<ExternalModuleDependency>?
 ): ExternalModuleDependency? = run {
-    uncheckedCast<ExternalModuleDependency>(create(dependencyNotation)).also { dependency ->
-        if (dependency == null) return@run null
-        dependencyConfiguration?.execute(dependency)
-        add(configuration, dependency)
-    }
+  uncheckedCast<ExternalModuleDependency>(create(dependencyNotation)).also { dependency ->
+    if (dependency == null) return@run null
+    dependencyConfiguration?.execute(dependency)
+    add(configuration, dependency)
+  }
 }
