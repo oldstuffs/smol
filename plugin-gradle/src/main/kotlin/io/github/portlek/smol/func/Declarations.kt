@@ -25,6 +25,6 @@ fun Project.createConfig(configName: String, vararg extends: String): Configurat
   return smolConfig
 }
 
-fun DependencyHandlerScope.smol(version: String = "+"): String = smolJarLib(version)
+fun DependencyHandlerScope.smolJar(version: String = "+"): String = smolJarLib(version)
 
-fun DependencyHandler.smol(version: String = "+"): String = smolJarLib(version)
+fun DependencyHandler.smolJar(version: String = "+"): String = smolJarLib(version)

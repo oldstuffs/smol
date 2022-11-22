@@ -16,9 +16,9 @@ plugins {
 dependencies {
   implementation "io.github.portlek:smol:VERSION"
   // Or
-  implementation smol("VERSION")
+  implementation smolJar("VERSION")
   // Or
-  implementation smol()
+  implementation smolJar()
 
   smol "anypackage:anyartifact:anyversion" // extends compileOnly
   smolApi "anypackage:anyartifact:anyversion" // extends compileOnlyApi
