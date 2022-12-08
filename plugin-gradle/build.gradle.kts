@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
   implementation(project(":smol"))
-  compileOnly(kotlin("stdlib", "1.7.21"))
+  compileOnly(kotlin("stdlib", "1.7.22"))
   implementation(libs.coroutines)
   implementation(libs.gson)
   compileOnly(libs.shadow)
