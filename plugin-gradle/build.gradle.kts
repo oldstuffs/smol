@@ -118,19 +118,16 @@ signing {
 }
 
 gradlePlugin {
+  website.set("https://github.com/portlek/smol")
+  vcsUrl.set("https://github.com/portlek/smol")
+  description = "Very easy to setup and downloads any public dependency at runtime!"
   plugins {
     create("smol") {
       id = "io.github.portlek.smol-plugin-gradle"
       displayName = "Smol"
       description = "Java runtime dependency management."
       implementationClass = "io.github.portlek.smol.SmolPlugin"
+      tags.set(listOf("runtime dependency", "relocation"))
     }
   }
-}
-
-pluginBundle {
-  website = "https://github.com/portlek/smol"
-  vcsUrl = "https://github.com/portlek/smol"
-  tags = listOf("runtime dependency", "relocation")
-  description = "Very easy to setup and downloads any public dependency at runtime!"
 }
