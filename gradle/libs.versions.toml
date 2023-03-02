@@ -1,6 +1,6 @@
 [libraries]
 lombok = { module = "org.projectlombok:lombok", version = "1.18.26" }
-annotations = { module = "org.jetbrains:annotations", version = "24.0.0" }
+annotations = { module = "org.jetbrains:annotations", version = "24.0.1" }
 gson = { module = "com.google.code.gson:gson", version = "2.10.1" }
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.6.4" }
 shadow = { module = "com.github.jengelman.gradle.plugins:shadow", version = "6.1.0" }
